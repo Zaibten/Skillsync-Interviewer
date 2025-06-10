@@ -1,0 +1,50 @@
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[7].use[3]!./src/components/loaders/mini-loader/mini-loader.module.css ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************/
+.mini-loader_loader__gYaGN {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: inline-block;
+  border-top: 3px solid white;
+  border-right: 3px solid transparent;
+  box-sizing: border-box;
+  animation: mini-loader_rotation__YPAao 1s linear infinite;
+}
+
+@keyframes mini-loader_rotation__YPAao {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[7].use[3]!./src/components/loaders/loader-with-logo/loader.module.css ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************/
+.loader_loader__6KRyv {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: inline-block;
+  border-top: 5px solid #4f46e5;
+  border-right: 5px solid transparent;
+  box-sizing: border-box;
+  animation: loader_rotation__431g4 1s linear infinite;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@keyframes loader_rotation__431g4 {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
