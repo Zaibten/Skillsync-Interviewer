@@ -61,7 +61,6 @@ function CallInfo({
   const [tabSwitchCount, setTabSwitchCount] = useState<number>();
   const [emotion, setemotion] = useState<string>("");
 
-
   useEffect(() => {
     const fetchResponses = async () => {
       setIsLoading(true);
@@ -171,8 +170,7 @@ function CallInfo({
                 Response Analysis and Insights
               </p> */}
               <div>
-                <div className="flex flex-col">
-</div>
+                <div className="flex flex-col"></div>
                 <div className="flex justify-between items-center pb-4 pr-2">
                   <div
                     className=" inline-flex items-center text-indigo-600 hover:cursor-pointer"
@@ -201,8 +199,11 @@ function CallInfo({
                         <p className="text-sm font-semibold px-2">{name}</p>
                       )}
                       {email && <p className="text-sm px-2">{email}</p>}
-                        {emotion && <p className="text-sm italic px-2 text-gray-600">The emotions of candidate express: {emotion}</p>}
-
+                      {emotion && (
+                        <p className="text-sm italic px-2 text-gray-600">
+                          The emotions of candidate express: {emotion}
+                        </p>
+                      )}
                     </div>
                   </div>
                   <div className="flex flex-row mr-2 items-center gap-3">

@@ -88,7 +88,6 @@ function Call({ interview }: InterviewProps) {
   const [emotion, setEmotion] = useState<string>("");
   const [emotions, setEmotions] = React.useState<string[]>([]);
 
-
   useEffect(() => {
     const startVideo = async () => {
       try {
@@ -130,7 +129,7 @@ function Call({ interview }: InterviewProps) {
           const expressions = detections.expressions;
           const maxEmotion = Object.entries(expressions).reduce(
             (max, current) => (current[1] > max[1] ? current : max),
-            ["neutral", 0]
+            ["neutral", 0],
           );
           setEmotion(maxEmotion[0]);
         } else {
@@ -141,7 +140,10 @@ function Call({ interview }: InterviewProps) {
         if (ctx) {
           ctx.clearRect(0, 0, canvas.width, canvas.height);
           if (detections) {
-            const resizedDetections = faceapi.resizeResults(detections, displaySize);
+            const resizedDetections = faceapi.resizeResults(
+              detections,
+              displaySize,
+            );
             faceapi.draw.drawDetections(canvas, resizedDetections);
             faceapi.draw.drawFaceExpressions(canvas, resizedDetections);
           }
@@ -255,73 +257,78 @@ function Call({ interview }: InterviewProps) {
     }
   };
   useEffect(() => {
-  const startCamera = async () => {
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-      if (videoRef.current) {
-        videoRef.current.srcObject = stream;
+    const startCamera = async () => {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: true,
+        });
+        if (videoRef.current) {
+          videoRef.current.srcObject = stream;
+        }
+      } catch (err) {
+        console.error("Error accessing camera: ", err);
       }
-    } catch (err) {
-      console.error("Error accessing camera: ", err);
-    }
-  };
-
-  startCamera();
-
-  return () => {
-    if (videoRef.current?.srcObject) {
-      const tracks = (videoRef.current.srcObject as MediaStream).getTracks();
-      tracks.forEach((track) => track.stop());
-    }
-  };
-}, []);
-
-// useEffect(() => {
-//   if (isEnded) {
-//     console.log("Saving emotion:", emotion);  // Debug log
-
-//     const updateInterview = async () => {
-//       const result = await ResponseService.saveResponse(
-//         { is_ended: true, tab_switch_count: tabSwitchCount, emotion: emotion },
-//         callId,
-//       );
-//       console.log("Save response result:", result);  // Debug log
-//     };
-
-//     updateInterview();
-//   }
-// }, [isEnded, emotion]);
-
-
-// Whenever emotion changes and is not null or empty, add it to the array
-useEffect(() => {
-  if (emotion && emotion !== "No face detected") {
-    setEmotions(prev => {
-      if (!prev.includes(emotion)) {
-        return [...prev, emotion];
-      }
-      return prev;
-    });
-  }
-}, [emotion]);
-
-// When interview ends, save concatenated emotions as a string
-useEffect(() => {
-  if (isEnded) {
-    const updateInterview = async () => {
-      const concatenatedEmotions = emotions.join(", ");
-      console.log("Saving emotions:", concatenatedEmotions);
-
-      const result = await ResponseService.saveResponse(
-        { is_ended: true, tab_switch_count: tabSwitchCount, emotion: concatenatedEmotions },
-        callId,
-      );
-      console.log("Save response result:", result);
     };
 
-    updateInterview();
-  }
-}, [isEnded, emotions]);
+    startCamera();
+
+    return () => {
+      if (videoRef.current?.srcObject) {
+        const tracks = (videoRef.current.srcObject as MediaStream).getTracks();
+        tracks.forEach((track) => track.stop());
+      }
+    };
+  }, []);
+
+  // useEffect(() => {
+  //   if (isEnded) {
+  //     console.log("Saving emotion:", emotion);  // Debug log
+
+  //     const updateInterview = async () => {
+  //       const result = await ResponseService.saveResponse(
+  //         { is_ended: true, tab_switch_count: tabSwitchCount, emotion: emotion },
+  //         callId,
+  //       );
+  //       console.log("Save response result:", result);  // Debug log
+  //     };
+
+  //     updateInterview();
+  //   }
+  // }, [isEnded, emotion]);
+
+  // Whenever emotion changes and is not null or empty, add it to the array
+  useEffect(() => {
+    if (emotion && emotion !== "No face detected") {
+      setEmotions((prev) => {
+        if (!prev.includes(emotion)) {
+          return [...prev, emotion];
+        }
+        return prev;
+      });
+    }
+  }, [emotion]);
+
+  // When interview ends, save concatenated emotions as a string
+  useEffect(() => {
+    if (isEnded) {
+      const updateInterview = async () => {
+        const concatenatedEmotions = emotions.join(", ");
+        console.log("Saving emotions:", concatenatedEmotions);
+
+        const result = await ResponseService.saveResponse(
+          {
+            is_ended: true,
+            tab_switch_count: tabSwitchCount,
+            emotion: concatenatedEmotions,
+          },
+          callId,
+        );
+        console.log("Save response result:", result);
+      };
+
+      updateInterview();
+    }
+  }, [isEnded, emotions]);
 
   const startConversation = async () => {
     const data = {
@@ -407,7 +414,7 @@ useEffect(() => {
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       {isStarted && <TabSwitchWarning />}
       <div className="bg-white rounded-md md:w-[80%] w-[90%]">
-<Card className="w-full max-w-[1000px] mx-auto p-4 h-auto rounded-lg border-2 border-b-4 border-r-4 border-black text-xl font-bold transition-all md:block dark:border-white overflow-hidden">
+        <Card className="w-full max-w-[1000px] mx-auto p-4 h-auto rounded-lg border-2 border-b-4 border-r-4 border-black text-xl font-bold transition-all md:block dark:border-white overflow-hidden">
           <div>
             <div className="m-4 h-[15px] rounded-lg border-[1px]  border-black">
               <div
@@ -683,30 +690,31 @@ useEffect(() => {
               </div>
             )}
           </div>
-<div className="fixed right-4 top-4 w-[300px] h-[340px] bg-white shadow-lg z-50 p-3 flex flex-col items-center rounded-xl">
-  <video
-    ref={videoRef}
-    width="260"
-    height="180"
-    autoPlay
-    muted
-    playsInline
-    style={{ borderRadius: "8px", border: "2px solid black" }}
-  />
-  <canvas
-    ref={canvasRef}
-    width="260"
-    height="180"
-    style={{ position: "absolute", top: 0, left: 0 }}
-  />
-  <div className="mt-3 text-sm font-semibold text-center bg-white bg-opacity-90 p-1 rounded shadow">
-    Detected Emotion:{" "}
-    <span className="text-indigo-600">
-      {emotion && emotion.trim() !== "" ? emotion : "No face detected"}
-    </span>
-  </div>
-</div>
-
+          <div className="fixed right-4 top-4 w-[300px] h-[340px] bg-white shadow-lg z-50 p-3 flex flex-col items-center rounded-xl">
+            <video
+              ref={videoRef}
+              width="260"
+              height="180"
+              autoPlay
+              muted
+              playsInline
+              style={{ borderRadius: "8px", border: "2px solid black" }}
+            />
+            <canvas
+              ref={canvasRef}
+              width="260"
+              height="180"
+              style={{ position: "absolute", top: 0, left: 0 }}
+            />
+            <div className="mt-3 text-sm font-semibold text-center bg-white bg-opacity-90 p-1 rounded shadow">
+              Detected Emotion:{" "}
+              <span className="text-indigo-600">
+                {emotion && emotion.trim() !== ""
+                  ? emotion
+                  : "No face detected"}
+              </span>
+            </div>
+          </div>
         </Card>
         <a
           className="flex flex-row justify-center align-middle mt-3"

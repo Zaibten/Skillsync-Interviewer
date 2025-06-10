@@ -160,7 +160,9 @@ function Interviews() {
                     </div>
                     <p className="text-l text-center">
                       Contact{" "}
-                      <span className="font-semibold">founders@Skillsyncinfo.co</span>{" "}
+                      <span className="font-semibold">
+                        founders@Skillsyncinfo.co
+                      </span>{" "}
                       to upgrade your plan.
                     </p>
                   </div>

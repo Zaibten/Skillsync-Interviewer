@@ -33,7 +33,9 @@ function JobsPage() {
 
     try {
       const query = new URLSearchParams({ position, country, location });
-      const res = await fetch(`https://scrappingserver.vercel.app/api/jobs?${query.toString()}`);
+      const res = await fetch(
+        `https://scrappingserver.vercel.app/api/jobs?${query.toString()}`,
+      );
       if (!res.ok) throw new Error("Failed to fetch jobs");
       const data = await res.json();
       setJobs(data);
@@ -51,10 +53,15 @@ function JobsPage() {
           <BriefcaseIcon className="text-blue-600" size={28} />
           <h2 className="text-3xl font-bold text-gray-800">Job Finder</h2>
         </div>
-        <p className="text-gray-500 text-sm">Search and explore job opportunities around you.</p>
+        <p className="text-gray-500 text-sm">
+          Search and explore job opportunities around you.
+        </p>
       </div>
 
-      <form onSubmit={fetchJobs} className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+      <form
+        onSubmit={fetchJobs}
+        className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6"
+      >
         <input
           type="text"
           value={position}
@@ -116,7 +123,9 @@ function JobsPage() {
                   <td className="px-6 py-4 font-medium">{job.title}</td>
                   <td className="px-6 py-4">{job.companyName}</td>
                   <td className="px-6 py-4">{job.location}</td>
-                  <td className="px-6 py-4 max-w-xs truncate">{job.description}</td>
+                  <td className="px-6 py-4 max-w-xs truncate">
+                    {job.description}
+                  </td>
                   <td className="px-6 py-4">
                     <a
                       href={job.url}

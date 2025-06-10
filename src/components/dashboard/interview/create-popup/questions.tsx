@@ -100,8 +100,8 @@ function QuestionsPopup({ interviewData, setProceed, setOpen }: Props) {
   }, [questions.length]);
 
   return (
- <div className="w-full max-w-4xl mx-auto px-4 py-10 my-10 h-[75vh] overflow-y-auto text-center">
-        <div
+    <div className="w-full max-w-4xl mx-auto px-4 py-10 my-10 h-[75vh] overflow-y-auto text-center">
+      <div
         className={`text-center px-1 flex flex-col justify-top items-center w-[38rem] ${
           interviewData.question_count > 1 ? "h-[29rem]" : ""
         } `}

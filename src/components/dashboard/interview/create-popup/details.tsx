@@ -142,7 +142,7 @@ function DetailsPopup({
 
   return (
     <>
-<div className="w-full max-w-4xl mx-auto px-4 py-10 my-10 h-[75vh] overflow-y-auto text-center">
+      <div className="w-full max-w-4xl mx-auto px-4 py-10 my-10 h-[75vh] overflow-y-auto text-center">
         <h1 className="text-xl font-semibold">Create an Interview</h1>
         <div className="flex flex-col justify-center items-start mt-4 ml-10 mr-8">
           <div className="flex flex-row justify-center items-center">
