@@ -1,3 +1,33 @@
 {
-  "pages": {}
+  "pages": {
+    "/(user)/call/[interviewId]/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/(user)/call/[interviewId]/page.css",
+      "static/chunks/app/(user)/call/[interviewId]/page.js"
+    ],
+    "/(user)/layout": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/(user)/layout.css",
+      "static/chunks/app/(user)/layout.js"
+    ],
+    "/(client)/dashboard/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/(client)/dashboard/page.css",
+      "static/chunks/app/(client)/dashboard/page.js"
+    ],
+    "/(client)/layout": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/(client)/layout.css",
+      "static/chunks/app/(client)/layout.js"
+    ],
+    "/(client)/interviews/[interviewId]/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(client)/interviews/[interviewId]/page.js"
+    ]
+  }
 }
