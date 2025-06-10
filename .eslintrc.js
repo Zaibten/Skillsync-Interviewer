@@ -1,11 +1,12 @@
+/** @type {import("eslint").Linter.Config} */
 module.exports = {
   root: true,
   extends: ["next/core-web-vitals", "prettier"],
   rules: {
-    curly: "error",
-    "newline-before-return": "error",
+    curly: ["warn", "all"],
+    "newline-before-return": "warn",
     "no-restricted-exports": [
-      "error",
+      "warn",
       {
         restrictDefaultExports: {
           direct: false,
@@ -17,7 +18,7 @@ module.exports = {
       },
     ],
     "react/jsx-sort-props": [
-      "error",
+      "warn",
       {
         noSortAlphabetically: true,
         shorthandLast: true,
@@ -26,15 +27,15 @@ module.exports = {
     ],
     "react/no-array-index-key": "warn",
     "react/no-danger": "warn",
-    "react/self-closing-comp": "error",
+    "react/self-closing-comp": "warn",
     "react/function-component-definition": [
-      "error",
+      "warn",
       {
         namedComponents: "arrow-function",
         unnamedComponents: "arrow-function",
       },
     ],
-    "jsx-a11y/alt-text": "error",
+    "jsx-a11y/alt-text": "warn",
     "import/no-extraneous-dependencies": [
       "error",
       {

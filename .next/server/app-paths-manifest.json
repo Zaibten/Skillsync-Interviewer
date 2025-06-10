@@ -1,7 +1,1 @@
-{
-  "/api/get-call/route": "app/api/get-call/route.js",
-  "/(client)/dashboard/page": "app/(client)/dashboard/page.js",
-  "/(client)/interviews/[interviewId]/page": "app/(client)/interviews/[interviewId]/page.js",
-  "/(client)/dashboard/interviewers/page": "app/(client)/dashboard/interviewers/page.js",
-  "/(user)/call/[interviewId]/page": "app/(user)/call/[interviewId]/page.js"
-}
+{}
