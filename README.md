@@ -1,6 +1,5 @@
 # 🚀 Skillsync AI Interviewer – Your Smart Hiring Companion & Job Portal 🤖✨
 
-
 Skillsync AI Interviewer is a cross-platform (Web + Flutter) application that revolutionizes the hiring process through AI-powered voice interviews, smart analysis, and real-time job scraping using NLP from Indeed and other job portals.
 
 ## 🔥 Key Features
