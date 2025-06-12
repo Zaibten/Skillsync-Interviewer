@@ -160,13 +160,13 @@ function EditInterview({ interview }: EditInterviewProps) {
       <div className="flex flex-col bg-gray-200 rounded-md min-h-[120px] p-2 pl-4">
         <div>
           <div
-            className="mt-2 ml-1 pr-2 inline-flex items-center text-indigo-600 hover:cursor-pointer"
+            className="mt-2 ml-1 pr-2 inline-flex items-center text-blue-600 hover:cursor-pointer"
             onClick={() => {
               router.push(`/interviews/${interview?.id}`);
             }}
           >
             <ArrowLeft className="mr-2" />
-            <p className="text-sm font-semibold">Back to Summary</p>
+            <p className="text-sm font-semibold">Back</p>
           </div>
         </div>
         <div className="flex flex-row justify-between">
@@ -179,7 +179,7 @@ function EditInterview({ interview }: EditInterviewProps) {
           <div className="flex flex-row gap-3">
             <Button
               disabled={isClicked}
-              className="bg-indigo-600 hover:bg-indigo-800 mt-2"
+              className="bg-blue-600 hover:bg-blue-800 mt-2"
               onClick={() => {
                 setIsClicked(true);
                 onSave();
@@ -207,7 +207,7 @@ function EditInterview({ interview }: EditInterviewProps) {
                 <AlertDialogFooter>
                   <AlertDialogCancel>Cancel</AlertDialogCancel>
                   <AlertDialogAction
-                    className="bg-indigo-600 hover:bg-indigo-800"
+                    className="bg-blue-600 hover:bg-blue-800"
                     onClick={async () => {
                       await onDeleteInterviewClick();
                     }}
@@ -256,7 +256,7 @@ function EditInterview({ interview }: EditInterviewProps) {
                     <div
                       className={`w-[96px] overflow-hidden rounded-full ${
                         selectedInterviewer === item.id
-                          ? "border-4 border-indigo-600"
+                          ? "border-4 border-blue-600"
                           : ""
                       }`}
                       onClick={() => {
@@ -288,7 +288,7 @@ function EditInterview({ interview }: EditInterviewProps) {
             <Switch
               checked={isAnonymous}
               className={`ml-4 mt-1 border-2 border-gray-300 ${
-                isAnonymous ? "bg-indigo-600" : "bg-white"
+                isAnonymous ? "bg-blue-600" : "bg-white"
               }`}
               onCheckedChange={(checked) => setIsAnonymous(checked)}
             />
@@ -363,13 +363,13 @@ function EditInterview({ interview }: EditInterviewProps) {
           <div ref={endOfListRef} />
           {questions.length < numQuestions ? (
             <div
-              className="border-indigo-600 opacity-75 hover:opacity-100 w-fit text-center rounded-full mx-auto"
+              className="border-blue-600 opacity-75 hover:opacity-100 w-fit text-center rounded-full mx-auto"
               onClick={handleAddQuestion}
             >
               <Plus
                 size={45}
                 strokeWidth={2.2}
-                className="text-indigo-600 text-center cursor-pointer"
+                className="text-blue-600 text-center cursor-pointer"
               />
             </div>
           ) : (

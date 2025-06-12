@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { Card, CardContent, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
-import { Copy, ArrowUpRight } from "lucide-react";
-import { CopyCheck } from "lucide-react";
+import { Copy, CopyCheck, ArrowUpRight } from "lucide-react";
 import { ResponseService } from "@/services/responses.service";
 import axios from "axios";
 import MiniLoader from "@/components/loaders/mini-loader/miniLoader";
@@ -33,8 +32,7 @@ function InterviewCard({ name, interviewerId, id, url, readableSlug }: Props) {
       setImg(interviewer.image);
     };
     fetchInterviewer();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [interviewerId]);
 
   useEffect(() => {
     const fetchResponses = async () => {
@@ -49,15 +47,9 @@ function InterviewCard({ name, interviewerId, id, url, readableSlug }: Props) {
                 const result = await axios.post("/api/get-call", {
                   id: response.call_id,
                 });
-
-                if (result.status !== 200) {
-                  throw new Error(`HTTP error! status: ${result.status}`);
-                }
+                if (result.status !== 200) throw new Error("Failed");
               } catch (error) {
-                console.error(
-                  `Failed to call api/get-call for response id ${response.call_id}:`,
-                  error,
-                );
+                console.error("Call error:", error);
               }
             }
           }
@@ -69,37 +61,25 @@ function InterviewCard({ name, interviewerId, id, url, readableSlug }: Props) {
     };
 
     fetchResponses();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [id]);
 
   const copyToClipboard = () => {
     navigator.clipboard
-      .writeText(
-        readableSlug ? `${base_url}/call/${readableSlug}` : (url as string),
-      )
-      .then(
-        () => {
-          setCopied(true);
-          toast.success(
-            "The link to your interview has been copied to your clipboard.",
-            {
-              position: "bottom-right",
-              duration: 3000,
-            },
-          );
-          setTimeout(() => {
-            setCopied(false);
-          }, 2000);
-        },
-        (err) => {
-          console.log("failed to copy", err.mesage);
-        },
-      );
+      .writeText(readableSlug ? `${base_url}/call/${readableSlug}` : url)
+      .then(() => {
+        setCopied(true);
+        toast.success("Interview link copied to clipboard.", {
+          position: "bottom-right",
+          duration: 3000,
+        });
+        setTimeout(() => setCopied(false), 2000);
+      })
+      .catch((err) => console.error("Copy failed", err));
   };
 
-  const handleJumpToInterview = (event: React.MouseEvent) => {
-    event.stopPropagation();
-    event.preventDefault();
+  const handleJumpToInterview = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
     const interviewUrl = readableSlug
       ? `/call/${readableSlug}`
       : `/call/${url}`;
@@ -109,60 +89,60 @@ function InterviewCard({ name, interviewerId, id, url, readableSlug }: Props) {
   return (
     <a
       href={`/interviews/${id}`}
-      style={{
-        pointerEvents: isFetching ? "none" : "auto",
-        cursor: isFetching ? "default" : "pointer",
-      }}
+      className={`relative w-64 h-72 m-3 p-0 rounded-2xl shadow-xl transition-transform hover:scale-105 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 ${
+        isFetching ? "pointer-events-none opacity-60" : ""
+      }`}
     >
-      <Card className="relative p-0 mt-4 inline-block cursor-pointer h-60 w-56 ml-1 mr-3 rounded-xl shrink-0 overflow-hidden shadow-md">
-        <CardContent className={`p-0 ${isFetching ? "opacity-60" : ""}`}>
-          <div className="w-full h-40 overflow-hidden bg-indigo-600 flex items-center text-center">
-            <CardTitle className="w-full mt-3 mx-2 text-white text-lg">
-              {name}
-              {isFetching && (
-                <div className="z-100 mt-[-5px]">
-                  <MiniLoader />
-                </div>
-              )}
-            </CardTitle>
+      <Card className="h-full w-full">
+        <CardContent className="p-0 h-full">
+          <div className="bg-gradient-to-r from-blue-500 to-purple-500 h-28 rounded-t-2xl flex items-center justify-center text-white text-xl font-semibold relative">
+            {name || "Untitled"}
+            {isFetching && (
+              <div className="absolute top-2 right-2">
+                <MiniLoader />
+              </div>
+            )}
           </div>
-          <div className="flex flex-row items-center mx-4 ">
-            <div className="w-full overflow-hidden">
+
+          <div className="flex items-center gap-4 p-4">
+            <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-blue-500">
               <Image
                 src={img}
-                alt="Picture of the interviewer"
-                width={70}
-                height={70}
-                className="object-cover object-center"
+                alt="Interviewer"
+                width={64}
+                height={64}
+                className="object-cover h-full w-full"
               />
             </div>
-            <div className="text-black text-sm font-semibold mt-2 mr-2 whitespace-nowrap">
-              Responses:{" "}
-              <span className="font-normal">
-                {responseCount?.toString() || 0}
-              </span>
+            <div className="flex flex-col text-sm text-zinc-700 dark:text-zinc-200">
+              <span className="font-semibold">Responses</span>
+              <span className="text-md">{responseCount ?? 0}</span>
             </div>
           </div>
-          <div className="absolute top-2 right-2 flex gap-1">
+
+          <div className="absolute bottom-3 right-3 flex gap-2">
             <Button
-              className="text-xs text-indigo-600 px-1 h-6"
-              variant={"secondary"}
+              size="sm"
+              variant="ghost"
+              className="hover:bg-blue-100 dark:hover:bg-blue-900 p-1"
               onClick={handleJumpToInterview}
             >
-              <ArrowUpRight size={16} />
+              <ArrowUpRight size={18} className="text-blue-600" />
             </Button>
+
             <Button
-              className={`text-xs text-indigo-600 px-1 h-6  ${
-                copied ? "bg-indigo-300 text-white" : ""
+              size="sm"
+              variant="ghost"
+              className={`hover:bg-blue-100 dark:hover:bg-blue-900 p-1 ${
+                copied ? "bg-blue-600 text-white" : ""
               }`}
-              variant={"secondary"}
-              onClick={(event) => {
-                event.stopPropagation();
-                event.preventDefault();
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
                 copyToClipboard();
               }}
             >
-              {copied ? <CopyCheck size={16} /> : <Copy size={16} />}
+              {copied ? <CopyCheck size={18} /> : <Copy size={18} />}
             </Button>
           </div>
         </CardContent>

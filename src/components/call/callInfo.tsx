@@ -107,10 +107,10 @@ function CallInfo({
 
   useEffect(() => {
     const replaceAgentAndUser = (transcript: string, name: string): string => {
-      const agentReplacement = "**AI interviewer:**";
+      const agentReplacement = "**Skillsync:**";
       const userReplacement = `**${name}:**`;
 
-      // Replace "Agent:" with "AI interviewer:" and "User:" with the variable `${name}:`
+      // Replace "Agent:" with "Skillsync:" and "User:" with the variable `${name}:`
       let updatedTranscript = transcript
         .replace(/Agent:/g, agentReplacement)
         .replace(/User:/g, userReplacement);
@@ -164,7 +164,7 @@ function CallInfo({
         </div>
       ) : (
         <>
-          <div className="bg-slate-200 rounded-2xl min-h-[120px] p-4 px-5 y-3">
+          <div className="bg-gray-200 rounded-2xl min-h-[120px] p-4 px-5 y-3">
             <div className="flex flex-col justify-between bt-2">
               {/* <p className="font-semibold my-2 ml-2">
                 Response Analysis and Insights
@@ -173,17 +173,17 @@ function CallInfo({
                 <div className="flex flex-col"></div>
                 <div className="flex justify-between items-center pb-4 pr-2">
                   <div
-                    className=" inline-flex items-center text-indigo-600 hover:cursor-pointer"
+                    className=" inline-flex items-center text-blue-600 hover:cursor-pointer"
                     onClick={() => {
                       router.push(`/interviews/${interviewId}`);
                     }}
                   >
                     <ArrowLeft className="mr-2" />
-                    <p className="text-sm font-semibold">Back to Summary</p>
+                    <p className="text-sm font-semibold">Back</p>
                   </div>
                   {tabSwitchCount && tabSwitchCount > 0 && (
                     <p className="text-sm font-semibold text-red-500 bg-red-200 rounded-sm px-2 py-1">
-                      Tab Switching Detected
+                      Tab Switching Detected By The Candidate
                     </p>
                   )}
                 </div>
@@ -272,7 +272,7 @@ function CallInfo({
                           <AlertDialogCancel>Cancel</AlertDialogCancel>
 
                           <AlertDialogAction
-                            className="bg-indigo-600 hover:bg-indigo-800"
+                            className="bg-blue-600 hover:bg-blue-800"
                             onClick={async () => {
                               await onDeleteResponseClick();
                             }}
@@ -285,7 +285,7 @@ function CallInfo({
                   </div>
                 </div>
                 <div className="flex flex-col mt-3">
-                  <p className="font-semibold">Interview Recording</p>
+                  <p className="font-semibold">Candidate Interview Recording</p>
                   <div className="flex flex-row gap-3 mt-2">
                     {call?.recording_url && (
                       <ReactAudioPlayer src={call?.recording_url} controls />
@@ -304,8 +304,8 @@ function CallInfo({
             </div>
             {/* <div>{call.}</div> */}
           </div>
-          <div className="bg-slate-200 rounded-2xl min-h-[120px] p-4 px-5 my-3">
-            <p className="font-semibold my-2">General Summary</p>
+          <div className="bg-gray-200 rounded-2xl min-h-[120px] p-4 px-5 my-3">
+            <p className="font-semibold my-2">Candidate Score</p>
 
             <div className="grid grid-cols-3 gap-4 my-2 mt-4 ">
               {analytics?.overallScore !== undefined && (
@@ -314,18 +314,16 @@ function CallInfo({
                     <CircularProgress
                       classNames={{
                         svg: "w-28 h-28 drop-shadow-md",
-                        indicator: "stroke-indigo-600",
-                        track: "stroke-indigo-600/10",
-                        value: "text-3xl font-semibold text-indigo-600",
+                        indicator: "stroke-blue-600",
+                        track: "stroke-blue-600/10",
+                        value: "text-3xl font-semibold text-blue-600",
                       }}
                       value={analytics?.overallScore}
                       strokeWidth={4}
                       showValueLabel={true}
                       formatOptions={{ signDisplay: "never" }}
                     />
-                    <p className="font-medium my-auto text-xl">
-                      Overall Hiring Score
-                    </p>
+                    <p className="font-medium my-auto text-xl">Feedback</p>
                   </div>
                   <div className="">
                     <div className="font-medium ">
@@ -345,9 +343,9 @@ function CallInfo({
                     <CircularProgress
                       classNames={{
                         svg: "w-28 h-28 drop-shadow-md",
-                        indicator: "stroke-indigo-600",
-                        track: "stroke-indigo-600/10",
-                        value: "text-3xl font-semibold text-indigo-600",
+                        indicator: "stroke-blue-600",
+                        track: "stroke-blue-600/10",
+                        value: "text-3xl font-semibold text-blue-600",
                       }}
                       value={analytics?.communication.score}
                       maxValue={10}
@@ -420,8 +418,8 @@ function CallInfo({
           {analytics &&
             analytics.questionSummaries &&
             analytics.questionSummaries.length > 0 && (
-              <div className="bg-slate-200 rounded-2xl min-h-[120px] p-4 px-5 my-3">
-                <p className="font-semibold my-2 mb-4">Question Summary</p>
+              <div className="bg-gray-200 rounded-2xl min-h-[120px] p-4 px-5 my-3">
+                <p className="font-semibold my-2 mb-4">Interview Questions</p>
                 <ScrollArea className="rounded-md h-72 text-sm mt-3 py-3 leading-6 overflow-y-scroll whitespace-pre-line px-2">
                   {analytics?.questionSummaries.map((qs, index) => (
                     <QuestionAnswerCard
@@ -434,8 +432,10 @@ function CallInfo({
                 </ScrollArea>
               </div>
             )}
-          <div className="bg-slate-200 rounded-2xl min-h-[150px] max-h-[500px] p-4 px-5 mb-[150px]">
-            <p className="font-semibold my-2 mb-4">Transcript</p>
+          <div className="bg-gray-200 rounded-2xl min-h-[150px] max-h-[500px] p-4 px-5 mb-[150px]">
+            <p className="font-semibold my-2 mb-4">
+              Conversation between candidate & interviewer
+            </p>
             <ScrollArea className="rounded-2xl text-sm h-96  overflow-y-auto whitespace-pre-line px-2">
               <div
                 className="text-sm p-4 rounded-2xl leading-5 bg-slate-50"

@@ -175,12 +175,12 @@ function DetailsPopup({
                       setOpenInterviewerDetails(true);
                     }}
                   >
-                    <Info size={18} color="#4f46e5" strokeWidth={2.2} />
+                    <Info size={18} color="#4F46E5" strokeWidth={2.2} />
                   </button>
                   <div
                     className={`w-[96px] overflow-hidden rounded-full ${
                       selectedInterviewer === item.id
-                        ? "border-4 border-indigo-600"
+                        ? "border-4 border-blue-600"
                         : ""
                     }`}
                     onClick={() => setSelectedInterviewer(item.id)}
@@ -242,7 +242,7 @@ function DetailsPopup({
               <Switch
                 checked={isAnonymous}
                 className={`ml-4 mt-1 ${
-                  isAnonymous ? "bg-indigo-600" : "bg-[#E6E7EB]"
+                  isAnonymous ? "bg-blue-600" : "bg-[#E6E7EB]"
                 }`}
                 onCheckedChange={(checked) => setIsAnonymous(checked)}
               />
@@ -314,7 +314,7 @@ function DetailsPopup({
                   ? false
                   : true) || isClicked
               }
-              className="bg-indigo-600 hover:bg-indigo-800  w-40"
+              className="bg-blue-600 hover:bg-blue-800  w-40"
               onClick={() => {
                 setIsClicked(true);
                 onGenrateQuestions();
@@ -332,7 +332,7 @@ function DetailsPopup({
                   ? false
                   : true) || isClicked
               }
-              className="bg-indigo-600 w-40 hover:bg-indigo-800"
+              className="bg-blue-600 w-40 hover:bg-blue-800"
               onClick={() => {
                 setIsClicked(true);
                 onManual();

@@ -43,10 +43,10 @@ export default function RootLayout({
             <Toaster
               toastOptions={{
                 classNames: {
-                  toast: "bg-white border-2 border-indigo-400",
+                  toast: "bg-white border-2 border-blue-400",
                   title: "text-black",
                   description: "text-red-400",
-                  actionButton: "bg-indigo-400",
+                  actionButton: "bg-blue-400",
                   cancelButton: "bg-orange-400",
                   closeButton: "bg-lime-400",
                 },

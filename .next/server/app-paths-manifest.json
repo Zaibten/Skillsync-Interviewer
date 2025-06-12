@@ -1,3 +1,7 @@
 {
-  "/(client)/dashboard/page": "app/(client)/dashboard/page.js"
+  "/(client)/dashboard/page": "app/(client)/dashboard/page.js",
+  "/(user)/call/[interviewId]/page": "app/(user)/call/[interviewId]/page.js",
+  "/(client)/interviews/[interviewId]/page": "app/(client)/interviews/[interviewId]/page.js",
+  "/(client)/dashboard/interviewers/page": "app/(client)/dashboard/interviewers/page.js",
+  "/(client)/dashboard/jobs/page": "app/(client)/dashboard/jobs/page.js"
 }
