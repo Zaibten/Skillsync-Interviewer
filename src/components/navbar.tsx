@@ -18,7 +18,9 @@ function Navbar() {
             <Sparkles className="text-blue-600 dark:text-blue-400 h-6 w-6" />
             <span className="font-semibold text-xl text-gray-900 dark:text-white">
               Skill
-              <span className="text-blue-600 dark:text-blue-400">sync</span>{" "}
+              <span className="text-blue-600 dark:text-blue-400">
+                sync
+              </span>{" "}
               Info
             </span>
           </Link>
