@@ -1,1 +1,4 @@
-{}
+{
+  "/(client)/dashboard/page": "app/(client)/dashboard/page.js",
+  "/(user)/call/[interviewId]/page": "app/(user)/call/[interviewId]/page.js"
+}
