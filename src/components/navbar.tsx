@@ -1,9 +1,18 @@
+"use client";
+
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 import { OrganizationSwitcher, UserButton } from "@clerk/nextjs";
 import { Sparkles } from "lucide-react";
 
 function Navbar() {
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "//code.tidio.co/i6yedfauvr7xt0jg0jeeziplhpehao0o.js";
+    script.async = true;
+    document.body.appendChild(script);
+  }, []);
+
   return (
     <header className="fixed top-0 inset-x-0 z-50 bg-white dark:bg-gray-900 shadow-sm border-b dark:border-gray-700">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
