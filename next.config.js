@@ -1,7 +1,5 @@
-const withTM = require("next-transpile-modules")(["face-api.js"]);
-
 /** @type {import('next').NextConfig} */
-const nextConfig = withTM({
+const nextConfig = {
   async redirects() {
     return [
       {
@@ -28,16 +26,8 @@ const nextConfig = withTM({
       }),
     );
 
-    // Add fallbacks for Node.js core modules
-    webpackConfig.resolve.fallback = {
-      fs: false,
-      path: false,
-      os: false,
-      stream: false,
-    };
-
     return webpackConfig;
   },
-});
+};
 
 module.exports = nextConfig;
