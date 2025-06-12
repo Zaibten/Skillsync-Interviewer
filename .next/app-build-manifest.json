@@ -23,21 +23,6 @@
       "static/chunks/main-app.js",
       "static/css/app/(user)/layout.css",
       "static/chunks/app/(user)/layout.js"
-    ],
-    "/(client)/interviews/[interviewId]/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(client)/interviews/[interviewId]/page.js"
-    ],
-    "/(client)/dashboard/interviewers/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(client)/dashboard/interviewers/page.js"
-    ],
-    "/(client)/dashboard/jobs/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(client)/dashboard/jobs/page.js"
     ]
   }
 }
