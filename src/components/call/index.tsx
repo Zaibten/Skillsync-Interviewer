@@ -112,6 +112,7 @@ function Call({ interview }: InterviewProps) {
       startVideo();
     });
   }, []);
+
   useEffect(() => {
     let intervalId: number;
     const video = videoRef.current;
